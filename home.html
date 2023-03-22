@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PlayLife</title>
+    <style>
+        #toolbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #f0f0f0;
+            padding: 10px;
+        }
+
+        #container {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<div id="controls">
+    <label for="speed">Speed:</label>
+    <input type="range" id="speed" name="speed" min="0.01" max="0.1" value="0.05" step="0.01">
+    <br>
+    <button id="stop">Stop Rotation</button>
+    <button id="resume">Resume Rotation</button>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
