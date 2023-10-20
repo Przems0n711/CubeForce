@@ -1,46 +1,27 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js';
+import * as THREE from 'three';
 
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 var renderer = new THREE.WebGLRenderer();
 
-renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById('container').appendChild(renderer.domElement);
 
-document.getElementById('container').appendChild( renderer.domElement );
+var geometry = new THREE.PlaneGeometry(2000, 2000, 20, 20);
+var material = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true });
 
-var geometry = new THREE.BoxGeometry();
-var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-var cube = new THREE.Mesh( geometry, material );
+var plane = new THREE.Mesh(geometry, material);
+scene.add(plane);
 
-scene.add( cube );
-
-camera.position.z = 5;
-
-var rotationSpeed = 0.05;
-var isRotating = true;
+camera.position.z = 100;
 
 function animate() {
-    requestAnimationFrame( animate );
-    if (isRotating) {
-        cube.rotation.x += rotationSpeed;
-        cube.rotation.y += rotationSpeed;
-    }
-    renderer.render( scene, camera );
+    requestAnimationFrame(animate);
+
+    plane.rotation.x += 0.001;
+    plane.rotation.y += 0.001;
+
+    renderer.render(scene, camera);
 }
 
 animate();
-
-var speedInput = document.getElementById('speed');
-speedInput.addEventListener('input', function(e) {
-    rotationSpeed = parseFloat(e.target.value);
-});
-
-var stopButton = document.getElementById('stop');
-stopButton.addEventListener('click', function() {
-    isRotating = false;
-});
-
-var resumeButton = document.getElementById('resume');
-resumeButton.addEventListener('click', function() {
-    isRotating = true;
-});
